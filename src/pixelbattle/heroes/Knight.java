@@ -4,6 +4,8 @@ import pixelbattle.core.Hero;
 import pixelbattle.core.Skill;
 import pixelbattle.core.Target;
 import pixelbattle.engine.Sprite;
+import pixelbattle.core.Fighter;
+import pixelbattle.core.Ultimate;
 
 /** Лицар — міцний воїн ближнього бою. */
 public class Knight extends Hero {
@@ -29,14 +31,24 @@ public class Knight extends Hero {
         //   кожному ЖИВОМУ ворогу 15 шкоди та оглушення на 1 хід.
         //   (не забудьте import pixelbattle.core.Ultimate; та import pixelbattle.core.Fighter;)
         //
-        //   setUltimate(new Ultimate() {
-        //       @Override public String getName() { return "Небесний молот"; }
-        //       @Override public String getDescription() { return "..."; }
-        //       @Override public String activate(Fighter user, Fighter[] allies, Fighter[] enemies) {
-        //           for (Fighter e : enemies) { ... }
-        //           return "...";
-        //       }
-        //   });
+         setUltimate(new Ultimate() {
+         @Override
+         public String getName() {
+             return "Небесний молот"; }
+        @Override
+        public String getDescription() {
+             return "15 шкоди та оглушення кожного живого ворога на 1 хід"; }
+         @Override
+         public String activate(Fighter user, Fighter[] allies, Fighter[] enemies) {
+         for (Fighter enemy : enemies) {
+             if (enemy.isAlive()) {
+                 enemy.takeDamage(15);
+                 enemy.stun(1);
+                }
+              }
+        return user.getName() + " використовує Небесний молот!";
+              }
+          });
     }
 
     // TODO 4: пасивка «Важка броня» — перевизначте modifyIncomingDamage:
