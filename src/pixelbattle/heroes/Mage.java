@@ -25,6 +25,12 @@ public class Mage extends Hero {
             return user.getName() + " запускає вогняну кулю в "
                     + target.getName() + ": " + dmg + " шкоди";
         }));
+        addSkill(new Skill("Зцілення", Target.ALLY, 2, (user, target) -> {
+            int healed = target.heal(25);
+            return user.getName() + " зцілює " + target.getName() + " на " + healed + " HP";
+
+        }));
+
 
         // TODO 8: ультимейт «Метеорит» — окремий клас Meteor
         //   у файлі pixelbattle/ultimates/Meteor.java.
